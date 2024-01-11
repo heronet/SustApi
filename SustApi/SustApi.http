@@ -1,0 +1,30 @@
+@SustApi_HostAddress = http://localhost:5000/api
+
+GET {{SustApi_HostAddress}}/employees/workplace/department?title=Physics
+Accept: application/json
+
+###
+POST {{SustApi_HostAddress}}/employees/workplace
+Accept: application/json
+Content-Type: application/json
+
+{
+    "title": "Physics",
+    "type": "department"
+}
+
+# Add Employee
+###
+POST {{SustApi_HostAddress}}/employees
+Accept: application/json
+Content-Type: application/json
+
+{
+    "name": "Zafar Iqbal",
+    "workplaceTitle": "Physics",
+    "jobTitle": "Professor",
+    "phone": "880-821-713850",
+    "email": "Foo@bar.com",
+    "website": "https://mzi.rocks",
+    "imageUrl": "https://www.sust.edu/uploads/profile-images/1513593908.jpg"
+}
