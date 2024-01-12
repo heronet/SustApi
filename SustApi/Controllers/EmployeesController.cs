@@ -17,7 +17,7 @@ public class EmployeesController : ControllerBase
         DbContext = dbContext;
     }
 
-    [HttpGet("workplace/{workplaceType}")]
+    [HttpGet("{workplaceType}")]
     public async Task<ActionResult> GetEmployeesByWorkplaceName([FromRoute] string workplaceType, [FromQuery] string title)
     {
         var workplace = await DbContext.WorkPlaces
@@ -31,6 +31,18 @@ public class EmployeesController : ControllerBase
         var employees = workplace.Employees.Select(e => e.ToEmployeeDto());
 
         return Ok(employees);
+    }
+    [HttpGet("workplaces")]
+    public async Task<ActionResult> GetWorkplaces(string workplaceType)
+    {
+        var workplace = await DbContext.WorkPlaces
+            .Where(w => w.Type == workplaceType.Trim())
+            .FirstOrDefaultAsync();
+
+        if (workplace is null)
+            return BadRequest("Workplace does not exist");
+
+        return Ok(workplace);
     }
 
     [HttpPost]
@@ -71,7 +83,7 @@ public class EmployeesController : ControllerBase
         return BadRequest("An error occured");
     }
 
-    [HttpPost("workplace")]
+    [HttpPost("workplaces")]
     public async Task<ActionResult> AddWorkplace(WorkPlaceDto workplaceDto)
     {
         if (workplaceDto.Type.ToLower().Trim() != WorkPlaceTypes.Office &&

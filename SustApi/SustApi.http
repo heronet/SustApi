@@ -1,10 +1,15 @@
+# @SustApi_HostAddress = https://sustapi-t5in5dp7va-uc.a.run.app/api
 @SustApi_HostAddress = http://localhost:5000/api
 
-GET {{SustApi_HostAddress}}/employees/workplace/department?title=Physics
+###
+GET {{SustApi_HostAddress}}/employees/department?title=Physics
 Accept: application/json
 
 ###
-POST {{SustApi_HostAddress}}/employees/workplace
+GET {{SustApi_HostAddress}}/employees/workplaces
+
+###
+POST {{SustApi_HostAddress}}/employees/workplaces
 Accept: application/json
 Content-Type: application/json
 
